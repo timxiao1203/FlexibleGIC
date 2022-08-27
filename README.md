@@ -5,7 +5,7 @@ A flexible GIC is an investment with an embedded option to redeem the principal 
 We price the option of a flexible GIC with a one factor Hull-White model via a trinomial tree. 
 The Hull-White model assumes a normal distribution for the rates. Our solution constructs a Hull-White tree. The calibration procedures take an interest rate curve as input (ignoring volatility surfaces) and assume volatility and mean reversion parameters as constants. 
 
-The width of the tree increases as a square root of time rather than linearly as in the Hull-White algorithm. The tree wings that are away from the mean by more than  t1/2 are cut off. The resulting error is of the order of 10-8, which is much less than the error resulting from discretization of the random walk component of the interest rate. This modification gives a noticeable acceleration of the calculations at a large number of time slices (the calculation time scales then as n2.5 rather than n3 of the Hull-White tree, where n stands for the number of the tree time slices).
+The width of the tree increases as a square root of time rather than linearly as in the Hull-White algorithm. The tree wings that are away from the mean by more than  t1/2 are cut off. The resulting error is of the order of 10-8, which is much less than the error resulting from discretization of the random walk component of the interest rate. Interest coupon rate can be calculated like https://finpricing.com/lib/FiBondCoupon.html. This modification gives a noticeable acceleration of the calculations at a large number of time slices (the calculation time scales then as n2.5 rather than n3 of the Hull-White tree, where n stands for the number of the tree time slices).
 
 
 The initial approximation of the short rate in the middle node of a time slice is taken as a forward rate for the time interval between the given and next slices, without using the Hull-White analytical approximation, The initial value is subsequently improved by the Newton-Raphson formula.
@@ -19,9 +19,5 @@ Therefore, the cost of a modest improvement of accuracy very quickly becomes pro
 Users should be aware of these complications when using the tree methods in general. The derivative based values (theta, vega, duration and individual key rate sensitivities) should be used with the understanding that their accuracy is inherently lower than that of the option price. The Hull-White model should not be used for calculations of duration values and the key rate sensitivities for volatilities larger than 30%, and should be used with caution for lower volatilities
 
 References:
-
-https://finpricing.com/lib/EqCliquet.html
-
-https://osf.io/w97gv/wiki/home/
 
 https://osf.io/q6ut7/download
